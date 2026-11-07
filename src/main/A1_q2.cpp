@@ -18,7 +18,46 @@ namespace aim::q2 {
 struct LabelEdit { std::string from; std::string to; };
 
 // BEGIN IMPLEMENTATION
-std::string edit_labels(std::string labels, const std::vector<LabelEdit>& edits) { throw std::runtime_error("TODO"); }
+// aim-cpp-cw
+std::string edit_labels(std::string labels, const std::vector<LabelEdit>& edits)
+{
+  for (const LabelEdit& edit : edits) {
+    if (edit.from.empty()) {
+      if (!edit.to.empty()) {
+        if (!labels.empty()) {
+          labels += ',';
+        }
+        labels += edit.to;
+      }
+      continue;
+    }
+
+    std::size_t labelStart = 0;
+    while (labelStart < labels.size()) {
+      std::size_t labelEnd = labels.find(',', labelStart);
+      if (labelEnd == std::string::npos) {
+        labelEnd = labels.size();
+      }
+
+      if (labels.substr(labelStart, labelEnd - labelStart) == edit.from) {
+        if (!edit.to.empty()) {
+          labels.replace(labelStart, labelEnd - labelStart, edit.to);
+        } else if (labelEnd < labels.size()) {
+          labels.erase(labelStart, labelEnd - labelStart + 1);
+        } else if (labelStart > 0) {
+          labels.erase(labelStart - 1);
+        } else {
+          labels.clear();
+        }
+        break;
+      }
+
+      labelStart = labelEnd + 1;
+    }
+  }
+
+  return labels;
+}
 // END IMPLEMENTATION
 }
 
