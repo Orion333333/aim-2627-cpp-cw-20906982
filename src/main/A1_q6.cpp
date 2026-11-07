@@ -18,7 +18,40 @@ namespace aim::q6 {
 struct Target { int id; int x; int y; int hp; bool visible; };
 
 // BEGIN IMPLEMENTATION
-int select_target(const std::vector<Target>& targets, int max_range) { throw std::runtime_error("TODO"); }
+// aim-cpp-cw
+int select_target(const std::vector<Target>& targets, int max_range)
+{
+  if (max_range < 0) {
+    return -1;
+  }
+
+  long long rangeSquared = 1LL * max_range * max_range;
+  int bestId = -1;
+  int bestHp = 0;
+  long long bestDistance = 0;
+
+  for (const Target& target : targets) {
+    if (!target.visible || target.hp <= 0) {
+      continue;
+    }
+    long long x = target.x;
+    long long y = target.y;
+    long long distanceSquared = x * x + y * y;
+    if (distanceSquared > rangeSquared) {
+      continue;
+    }
+
+    if (bestId == -1 || target.hp < bestHp ||
+        (target.hp == bestHp &&
+         (distanceSquared < bestDistance ||
+          (distanceSquared == bestDistance && target.id < bestId)))) {
+      bestId = target.id;
+      bestHp = target.hp;
+      bestDistance = distanceSquared;
+    }
+  }
+  return bestId;
+}
 // END IMPLEMENTATION
 }
 
