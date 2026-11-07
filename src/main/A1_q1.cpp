@@ -18,8 +18,50 @@ namespace aim::q1 {
 
 
 // BEGIN IMPLEMENTATION
-long long ratio(long long hp, long long max_hp) { throw std::runtime_error("TODO"); }
-std::string report(int id, long long hp, long long max_hp, int battery) { throw std::runtime_error("TODO"); }
+// aim-cpp-cw
+long long ratio(long long hp, long long max_hp)
+{
+  if (max_hp <= 0) {
+    return -1;
+  }
+
+  if (hp < 0) {
+    hp = 0;
+  } else if (hp > max_hp) {
+    hp = max_hp;
+  }
+
+  return hp * 100 / max_hp;
+}
+
+std::string report(int id, long long hp, long long max_hp, int battery)
+{
+  if (battery < 0) {
+    battery = 0;
+  } else if (battery > 100) {
+    battery = 100;
+  }
+
+  long long percentage = ratio(hp, max_hp);
+  std::string hpText;
+  if (percentage == -1) {
+    hpText = "INVALID";
+  } else {
+    hpText = std::to_string(percentage);
+  }
+
+  std::string state;
+  if (battery >= 60) {
+    state = "OK";
+  } else if (battery >= 20) {
+    state = "WARNING";
+  } else {
+    state = "LOW";
+  }
+
+  return "ID=" + std::to_string(id) + ";HP=" + hpText +
+         ";BAT=" + std::to_string(battery) + ";STATE=" + state;
+}
 // END IMPLEMENTATION
 }
 
