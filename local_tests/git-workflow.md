@@ -118,6 +118,6 @@ git config --local --unset 'http.https://github.com/.proxy'
 
 Commit 保存本地版本，Push 同步到 GitHub。最终交卷还需按 README 提交回执，填写最终 `main` 提交号并保留对应 Actions 链接。
 
-2026-11-07 完成 Q8 后重新运行完整检查，Q1–Q8 各通过 2/2，公开自动分 60/60，`--require-core` 退出码为 0。报告在忽略目录 `scores/assessment-core-final/`，反映 B1 开始前的版本；当时选做分为 0/20。随后 B1 MVP 专项检查通过 2/2，专项选做分 10/20，报告在 `scores/b1-mvp/`；B2 尚未实现，完整合并报告留待后续验收更新。人工分、GitHub Actions 和正式提交状态尚未核验。
+2026-11-07 完成 B1 后重新运行合并检查，Q1–Q8 和 B1 各通过 2/2，公开自动分 60/60、选做分 10/20，`--require-core` 退出码为 0。报告在忽略目录 `scores/assessment-with-b1-final/`，十个源码哈希与当前文件一致；B1 随机与专项报告在 `scores/b1-final/`。B2 尚未实现，人工分、GitHub Actions 和正式提交状态尚未核验。
 
 全部必做题的本地公开检查已通过。接下来按用户指引完成代码理解、选做安排和提交；确认最终 `main` 的 CI 全部通过，核对 AI 声明及归档、最终 SHA 与回执要求，再完成正式交卷。
