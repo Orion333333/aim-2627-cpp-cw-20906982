@@ -18,7 +18,6 @@ namespace aim::q2 {
 struct LabelEdit { std::string from; std::string to; };
 
 // BEGIN IMPLEMENTATION
-// aim-cpp-cw
 std::string edit_labels(std::string labels, const std::vector<LabelEdit>& edits)
 {
   for (const LabelEdit& edit : edits) {

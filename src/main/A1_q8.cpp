@@ -19,7 +19,6 @@ struct Telemetry { int id; int hp; };
 struct Summary { int valid; int duplicate; int invalid; long long total_hp; std::vector<int> ids; };
 
 // BEGIN IMPLEMENTATION
-// aim-cpp-cw
 Summary summarize(const std::vector<Telemetry>& frames)
 {
   Summary result{0, 0, 0, 0, {}};

@@ -18,7 +18,6 @@ namespace aim::q1 {
 
 
 // BEGIN IMPLEMENTATION
-// aim-cpp-cw
 long long ratio(long long hp, long long max_hp)
 {
   if (max_hp <= 0) {

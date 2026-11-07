@@ -18,7 +18,6 @@ namespace aim::q3 {
 
 
 // BEGIN IMPLEMENTATION
-// aim-cpp-cw
 std::vector<int> alarms(const std::vector<int>& values, int k, long long threshold)
 {
   int n = static_cast<int>(values.size());
