@@ -18,7 +18,55 @@ namespace aim::q5 {
 
 
 // BEGIN IMPLEMENTATION
-std::vector<std::vector<int>> risk(const std::vector<std::string>& grid) { throw std::runtime_error("TODO"); }
+// aim-cpp-cw
+std::vector<std::vector<int>> risk(const std::vector<std::string>& grid)
+{
+  if (grid.empty()) {
+    return {};
+  }
+
+  std::size_t columns = grid.front().size();
+  if (columns == 0) {
+    throw std::invalid_argument("Grid rows must not be empty");
+  }
+  for (const std::string& line : grid) {
+    if (line.size() != columns) {
+      throw std::invalid_argument("Grid rows must have equal lengths");
+    }
+    for (char cell : line) {
+      if (cell != '.' && cell != '#') {
+        throw std::invalid_argument("Grid contains an invalid character");
+      }
+    }
+  }
+
+  int rowCount = static_cast<int>(grid.size());
+  int columnCount = static_cast<int>(columns);
+  std::vector<std::vector<int>> result(rowCount);
+  for (int row = 0; row < rowCount; ++row) {
+    result[row].resize(columnCount);
+    for (int column = 0; column < columnCount; ++column) {
+      if (grid[row][column] == '#') {
+        result[row][column] = -1;
+        continue;
+      }
+      if (row > 0 && grid[row - 1][column] == '#') {
+        ++result[row][column];
+      }
+      if (row + 1 < rowCount && grid[row + 1][column] == '#') {
+        ++result[row][column];
+      }
+      if (column > 0 && grid[row][column - 1] == '#') {
+        ++result[row][column];
+      }
+      if (column + 1 < columnCount && grid[row][column + 1] == '#') {
+        ++result[row][column];
+      }
+    }
+  }
+
+  return result;
+}
 // END IMPLEMENTATION
 }
 
